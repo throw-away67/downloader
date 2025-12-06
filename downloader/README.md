@@ -20,3 +20,7 @@ Options
 --timeout          : HTTP request timeout in seconds.
 --max-retries      : Number of retry attempts on download failure.
 --retry-backoff    : Base seconds for exponential backoff between retries.
+
+
+dependency:
+python packege: requests
