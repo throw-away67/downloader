@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Produkty</h2>
+<form action="{{ url_for('import_products') }}" method="post" enctype="multipart/form-data">
+  <label>Import JSON (pole objektů):</label>
+  <input type="file" name="products_json" accept=".json,application/json" />
+  <button type="submit">Importovat</button>
+</form>
+
+<table>
+  <thead>
+    <tr><th>ID</th><th>Název</th><th>Cena</th><th>Sklad</th><th>Aktivní</th></tr>
+  </thead>
+  <tbody>
+  {% for p in products %}
+    <tr>
+      <td>{{ p.id }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ "%.2f"|format(p.price) }}</td>
+      <td>{{ p.stock }}</td>
+      <td>{{ "ano" if p.is_active else "ne" }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<h3>Kategorie</h3>
+<ul>
+  {% for c in categories %}
+    <li>{{ c.name }} ({{ "ano" if c.is_active else "ne" }})</li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Zákazníci</h2>
+<form action="{{ url_for('import_customers') }}" method="post" enctype="multipart/form-data">
+  <label>Import CSV (name,email,credit,is_active):</label>
+  <input type="file" name="customers_csv" accept=".csv" />
+  <button type="submit">Importovat</button>
+</form>
+<table>
+  <thead>
+    <tr><th>ID</th><th>Jméno</th><th>Email</th><th>Kredit</th><th>Aktivní</th></tr>
+  </thead>
+  <tbody>
+  {% for c in customers %}
+    <tr>
+      <td>{{ c.id }}</td>
+      <td>{{ c.name }}</td>
+      <td>{{ c.email }}</td>
+      <td>{{ "%.2f"|format(c.credit) }}</td>
+      <td>{{ "ano" if c.is_active else "ne" }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

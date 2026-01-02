@@ -1,0 +1,4 @@
+name,email,credit,is_active
+"Alice Test","alice.test@example.com",120.5,true
+"Bob Test","bob.test@example.com",0,false
+"Čeněk Žák","czenek.zak@example.com",75.25,1

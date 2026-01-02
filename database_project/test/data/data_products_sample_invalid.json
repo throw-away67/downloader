@@ -1,0 +1,5 @@
+[
+  { "name": "Bad Price", "price": 0, "stock": 5, "is_active": true },
+  { "name": "Negative Stock", "price": 9.99, "stock": -3, "is_active": true },
+  { }
+]

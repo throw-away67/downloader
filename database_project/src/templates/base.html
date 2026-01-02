@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <title>orders</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+<header>
+  <h1>orders</h1>
+  <nav>
+    <a href="{{ url_for('index') }}">Domů</a>
+    <a href="{{ url_for('customers') }}">Zákazníci</a>
+    <a href="{{ url_for('products') }}">Produkty</a>
+    <a href="{{ url_for('orders') }}">Objednávky</a>
+    <a href="{{ url_for('order_new') }}">Nová objednávka</a>
+    <a href="{{ url_for('report') }}">Report</a>
+  </nav>
+</header>
+<main>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash">
+        {% for category, msg in messages %}
+          <div class="flash-{{ category }}">{{ msg }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer>
+  <small>&copy; 2026 Portfolio App</small>
+</footer>
+</body>
+</html>

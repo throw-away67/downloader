@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Detail objednávky #{{ order.id }}</h2>
+<ul>
+  <li>Zákazník: {{ customer.name }} ({{ customer.email }})</li>
+  <li>Status: {{ order.status }}</li>
+  <li>Zaplaceno: {{ "ano" if order.is_paid else "ne" }}</li>
+  <li>Celková částka: {{ "%.2f"|format(order.total_amount) }} Kč</li>
+  <li>Datum: {{ order.order_date }}</li>
+  <li>Čas doručení: {{ order.delivery_time if order.delivery_time else "-" }}</li>
+  <li>Vytvořeno: {{ order.created_at }}</li>
+</ul>
+
+<h3>Položky</h3>
+<table>
+  <thead>
+    <tr>
+      <th>ID položky</th>
+      <th>Produkt</th>
+      <th>Množství</th>
+      <th>Cena/ks</th>
+      <th>Mezisoučet</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in items %}
+    <tr>
+      <td>{{ i.id }}</td>
+      <td>{{ i.product_name }}</td>
+      <td>{{ i.quantity }}</td>
+      <td>{{ "%.2f"|format(i.unit_price) }} Kč</td>
+      <td>{{ "%.2f"|format(i.line_total) }} Kč</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<p><a href="{{ url_for('orders') }}">← Zpět na seznam objednávek</a></p>
+{% endblock %}

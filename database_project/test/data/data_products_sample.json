@@ -1,0 +1,5 @@
+[
+  { "name": "USB Hub 3.0", "price": 12.49, "stock": 25, "is_active": true },
+  { "name": "Notebook Stand", "price": 24.99, "stock": 10, "is_active": true },
+  { "name": "Old Mouse", "price": 5.00, "stock": 0, "is_active": false }
+]

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Souhrnný report</h2>
+
+<section>
+  <h3>Top zákazníci dle útraty</h3>
+  <table>
+    <thead><tr><th>Zákazník</th><th>Počet objednávek</th><th>Útrata</th></tr></thead>
+    <tbody>
+    {% for r in customer_totals %}
+      <tr>
+        <td>{{ r.customer_name }}</td>
+        <td>{{ r.orders_count }}</td>
+        <td>{{ "%.2f"|format(r.total_spent) }} Kč</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h3>Prodeje produktů</h3>
+  <table>
+    <thead><tr><th>Produkt</th><th>Počet ks</th><th>Tržby</th></tr></thead>
+    <tbody>
+    {% for r in product_sales %}
+      <tr>
+        <td>{{ r.product_name }}</td>
+        <td>{{ r.total_quantity_sold }}</td>
+        <td>{{ "%.2f"|format(r.total_revenue) }} Kč</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h3>Celkové statistiky</h3>
+  <ul>
+    <li>Počet objednávek: {{ overall.orders_count }}</li>
+    <li>Celkové tržby: {{ "%.2f"|format(overall.total_revenue) }} Kč</li>
+    <li>Minimální hodnota objednávky: {{ "%.2f"|format(overall.min_order_total) }} Kč</li>
+    <li>Maximální hodnota objednávky: {{ "%.2f"|format(overall.max_order_total) }} Kč</li>
+  </ul>
+</section>
+{% endblock %}

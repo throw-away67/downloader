@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Přehled</h2>
+<section>
+  <h3>Zákazníci</h3>
+  <ul>
+    {% for c in customers %}
+      <li>{{ c.name }} ({{ c.email }}) – kredit: {{ "%.2f"|format(c.credit) }}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section>
+  <h3>Produkty</h3>
+  <ul>
+    {% for p in products %}
+      <li>{{ p.name }} – cena: {{ "%.2f"|format(p.price) }} Kč, skladem: {{ p.stock }}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section>
+  <h3>Objednávky</h3>
+  <ul>
+    {% for o in orders %}
+      <li>#{{ o.id }} – {{ o.customer_name }} – {{ o.status }} – {{ "%.2f"|format(o.total_amount) }} Kč</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

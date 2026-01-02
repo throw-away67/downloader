@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Nová objednávka</h2>
+<form method="post" action="{{ url_for('order_new') }}">
+  <label>Zákazník:</label>
+  <select name="customer_id" required>
+    <option value="">-- vyberte --</option>
+    {% for c in customers %}
+      <option value="{{ c.id }}">{{ c.name }} ({{ c.email }})</option>
+    {% endfor %}
+  </select>
+
+  <label>Čas doručení (HH:MM:SS):</label>
+  <input type="text" name="delivery_time" placeholder="např. 14:30:00" />
+
+  <h3>Položky objednávky</h3>
+  <div id="items">
+    <div class="item">
+      <label>Produkt:</label>
+      <select name="product_id" required>
+        <option value="">-- vyberte --</option>
+        {% for p in products %}
+          <option value="{{ p.id }}">{{ p.name }} ({{ "%.2f"|format(p.price) }} Kč, skladem: {{ p.stock }})</option>
+        {% endfor %}
+      </select>
+      <label>Množství:</label>
+      <input type="number" name="quantity" min="1" value="1" required />
+    </div>
+  </div>
+  <button type="button" onclick="addItem()">Přidat položku</button>
+  <button type="submit">Odeslat objednávku</button>
+</form>
+
+<script>
+function addItem() {
+  const container = document.getElementById('items');
+  const div = document.createElement('div');
+  div.className = 'item';
+  div.innerHTML = `
+    <label>Produkt:</label>
+    <select name="product_id" required>
+      <option value="">-- vyberte --</option>
+      {% for p in products %}
+        <option value="{{ p.id }}">{{ p.name }} ({{ "%.2f"|format(p.price) }} Kč, skladem: {{ p.stock }})</option>
+      {% endfor %}
+    </select>
+    <label>Množství:</label>
+    <input type="number" name="quantity" min="1" value="1" required />
+  `;
+  container.appendChild(div);
+}
+</script>
+{% endblock %}

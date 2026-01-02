@@ -1,0 +1,14 @@
+database:
+  host: "192.168.123.70"
+  port: 3306
+  user: "dev"
+  password: "dev"
+  name: "dev"
+
+app:
+  secret_key: "change-this-in-production"
+  debug: false
+  allowed_import_formats:
+    - "csv"
+    - "json"
+  max_upload_size_mb: 5
